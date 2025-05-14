@@ -1,0 +1,25 @@
+#include "amber99sb-star-ildn-mut.ff/forcefield.itp"
+
+#include "gly_amber99sb-star-ildnTRUE.itp"
+#include "ser_amber99sb-star-ildnTRUE.itp"
+#include "tyr_amber99sb-star-ildnTRUE.itp"
+
+; Include water topology
+#include "amber99sb-star-ildn-mut.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+
+[ system ]
+PMX MODEL in water
+
+[ molecules ]
+Glycine 145
+Serine 145
+Tyrosine 145
+SOL              8886
