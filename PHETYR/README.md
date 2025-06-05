@@ -2,7 +2,8 @@
 This repository includes code required to replicate the results
 on amino acid sticker strenghts within peptide condensates.
 
-[![DOI]](https://doi.org/10.7554/eLife.104950.1)
+Publication: 
+* David De Sancho, Xabier López (2025). **Crossover in Aromatic Amino Acid Interaction Strength: Tyrosine vs. Phenylalanine in Biomolecular Condensates**. *eLife* **14**:RP104950 DOI: [10.7554/eLife.104950.1](https://doi.org/10.7554/eLife.104950.1)
 
 ### Analysis scripts
 #### SASA
