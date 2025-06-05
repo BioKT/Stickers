@@ -2,7 +2,7 @@
 This repository includes code required to replicate the results
 on amino acid sticker strenghts within peptide condensates.
 
-[![DOI](https://doi.org/10.7554/eLife.104950.1)
+[![DOI]](https://doi.org/10.7554/eLife.104950.1)
 
 ### Analysis scripts
 #### SASA
