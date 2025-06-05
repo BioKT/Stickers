@@ -1,4 +1,19 @@
 ## Scripts for the analysis of PHE/TYR peptide condensates:
+This repository includes code required to replicate the results
+on amino acid sticker strenghts within peptide condensates.
+
+[![DOI](https://doi.org/10.7554/eLife.104950.1)
+
+### Analysis scripts
+#### SASA
+* `calc_sasa.sh`
+
+#### Density profiles
+* `calc_density_replicates.sh`: Calculates density profiles in
+GSY/GSF condensates.
+* `analysis_dense_revision.ipynb`: Notebook for analysis of density
+profiles and torsion angles in GSY/GSF condensates.
+* `analysis_interactions.ipynb`:
 
 ### Structure and topology files
 #### Amino acids
@@ -27,9 +42,6 @@
 * `GGFGG_soup_XXXL_amber99sb-star-ildnTRUE_tip3p_rep1.top`
 * `GGFGG_soup_XXXL_amber99sb-star-ildnTRUE_tip3p_rep2.top`
 
-### Analysis scripts
-* `calc_density_replicates.sh`: Calculates density profiles in
-GSY/GSF condensates.
-* `analysis_dense_revision.ipynb`: Notebook for analysis of density
-profiles and torsion angles in GSY/GSF condensates.
-* `analysis_interactions.ipynb`:
+
+
+
