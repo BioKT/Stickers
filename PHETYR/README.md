@@ -12,9 +12,16 @@ Publication:
 #### Density profiles
 * `calc_density_replicates.sh`: Calculates density profiles in
 GSY/GSF condensates.
+
+#### Dipoles
+* `calc_dipole.sh`: Calculates dipole constant in different solutions.
+* `analysis_dipoles.sh`: Plots dipole convergence from simulations. 
+
+### Other analysis and visualization
 * `analysis_dense_revision.ipynb`: Notebook for analysis of density
 profiles and torsion angles in GSY/GSF condensates.
 * `analysis_interactions.ipynb`:
+* `analysis_solvents.ipynb`: Notebook for analysis of equilibration of pure solvents.
 
 ### Structure and topology files
 #### Amino acids
@@ -42,7 +49,3 @@ profiles and torsion angles in GSY/GSF condensates.
 * `GGFGG_soup_XXXL_amber99sb-star-ildnTRUE_tip3p_rep0.top`
 * `GGFGG_soup_XXXL_amber99sb-star-ildnTRUE_tip3p_rep1.top`
 * `GGFGG_soup_XXXL_amber99sb-star-ildnTRUE_tip3p_rep2.top`
-
-
-
-
