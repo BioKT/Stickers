@@ -21,6 +21,8 @@ GSY/GSF condensates.
 * `analysis_dense_revision.ipynb`: Notebook for analysis of density
 profiles and torsion angles in GSY/GSF condensates.
 * `analysis_interactions.ipynb`:
+* `analysis_remd_setup.ipynb`: Notebook for the analysis of equilibration of REMD for GSY and GSF condensates.
+* `analysis_remd.ipynb`: Notebook for the analysis of REMD results for GSY and GSF condensates.
 * `analysis_solvents.ipynb`: Notebook for analysis of equilibration of pure solvents.
 
 ### Structure and topology files
