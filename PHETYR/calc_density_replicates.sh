@@ -5,7 +5,7 @@ wat="tip3p"
 
 proot="GGFGG"
 
-for soup in soup_XXXL soupF_XXXL
+for soup in soupF_XXXL #soupF_XXXL
 do
     for rep in 0 1 2
     do
@@ -22,7 +22,7 @@ do
 EOF
         
             ie=0
-            for i in $(seq 0 1 49)
+            for i in $(seq 0 1 99)
             do
                 out="../analysis/${proot}_${soup}_${ff}_${wat}_rep${rep}_l${lambda}_npt_density_bin${i}"
                 ib=$ie
@@ -39,7 +39,7 @@ EOF
 13
 EOF
             ie=0
-            for i in $(seq 0 1 49)
+            for i in $(seq 0 1 99)
             do
                 out="../analysis/${proot}_${soup}_${ff}_${wat}_rep${rep}_l${lambda}_npt_densityF2Y_bin${i}"
                 ib=$ie
@@ -57,7 +57,7 @@ EOF
 EOF
 
            ie=0
-           for i in $(seq 0 1 49)
+           for i in $(seq 0 1 99)
            do
                out="../analysis/${proot}_${soup}_${ff}_${wat}_rep${rep}_l${lambda}_npt_densityH2O_bin${i}"
                ib=$ie
@@ -69,5 +69,4 @@ EOF
             wait
         done
     done
-    break
 done
