@@ -15,7 +15,7 @@ GSY/GSF condensates.
 
 #### Dipoles
 * `calc_dipole.sh`: Calculates dipole constant in different solutions.
-* `analysis_dipoles.sh`: Plots dipole convergence from simulations. 
+* `analysis_dipoles.ipynb`: Plots dipole convergence from simulations. 
 
 ### Other analysis and visualization
 * `analysis_dense_revision.ipynb`: Notebook for analysis of density
