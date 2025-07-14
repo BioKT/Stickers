@@ -20,10 +20,10 @@ do
     xtc="../data/${soup}_XXL_${ff}_${wat}_dense_npt_proc.xtc"
 
     rdf="../analysis/${soup}_XXL_${ff}_${wat}_dense_npt_rdf_CZ_OW"
-    gmx rdf -s $tpr -f $xtc -o $rdf -cn ${rdf}_cn -bin 0.005 -rmax 1.5 -ref 'atomname CZ' -sel 'atomname OW' -dt 5 -b 100000 &
+    gmx rdf -s $tpr -f $xtc -o $rdf -cn ${rdf}_cn -bin 0.005 -rmax 2 -ref 'atomname CZ' -sel 'atomname OW' -dt 5 -b 100000 &
 
     rdf="../analysis/${soup}_XXL_${ff}_${wat}_dense_npt_rdf_OW_OW"
-    gmx rdf -s $tpr -f $xtc -o $rdf -cn ${rdf}_cn -bin 0.005 -rmax 1.5 -ref 'atomname OW' -sel 'atomname OW' -dt 5 -b 100000 &
+    gmx rdf -s $tpr -f $xtc -o $rdf -cn ${rdf}_cn -bin 0.005 -rmax 2 -ref 'atomname OW' -sel 'atomname OW' -dt 5 -b 100000 &
         wait
 done
 
@@ -34,7 +34,7 @@ do
     xtc="../data/${soup}_XXL_${ff}_${wat}_dense_rep${rep}_npt_proc.xtc"
 
     rdf="../analysis/${soup}_XXL_${ff}_${wat}_dense_rep${rep}_npt_rdf_CZ_OW"
-    gmx rdf -s $tpr -f $xtc -o $rdf -cn ${rdf}_cn -bin 0.005 -rmax 1.5 -ref 'atomname CZ' -sel 'atomname OW' -dt 5 -b 100000 &
+    gmx rdf -s $tpr -f $xtc -o $rdf -cn ${rdf}_cn -bin 0.005 -rmax 2 -ref 'atomname CZ' -sel 'atomname OW' -dt 5 -b 100000 &
 
     rdf="../analysis/${soup}_XXL_${ff}_${wat}_dense_rep${rep}_npt_rdf_OH_OW"
     gmx rdf -s $tpr -f $xtc -o $rdf -cn ${rdf}_cn -bin 0.005 -rmax 2 -ref 'atomname OH' -sel 'atomname OW' -dt 5 -b 100000 &
