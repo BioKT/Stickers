@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-ff="amber99sb-star-ildn"
+ff="amber99sb-star-ildnTRUE"
 wat="tip3p"
 
 ### SOUPS
@@ -30,6 +30,20 @@ wat="tip3p"
 #    wait
 #
 #done
+for soup in soup_XXL #soupF_XXL
+do 
+    for rep in 0 1 4 5
+    do
+        tpr="../data/${soup}_${ff}_${wat}_dense_rep${rep}_npt.tpr" 
+        xtc="../data/${soup}_${ff}_${wat}_dense_rep${rep}_npt_proc.xtc"
+        out="../analysis/${soup}_${ff}_${wat}_dense_rep${rep}_npt_dip_sqr"
+        eps="../analysis/${soup}_${ff}_${wat}_dense_rep${rep}_npt_dip_eps"
+        gmx dipoles -s $tpr -f $xtc -o $out -temp 298 -eps $eps -b 100000 <<EOF
+0
+EOF
+    done
+done
+exit
 
 ### WATER
 #tpr="../data/h2o_box_npt.tpr"
@@ -87,39 +101,6 @@ wat="tip3p"
 #    done
 #    wait
 #done
-
-## SMALL
-ff="amber99sb-star-ildnTRUE"
-wat="tip3p"
-
-for soup in smallGS mediumGS largeGS
-do 
-    for lambda in 0 1
-    do
-        tpr="../data/GGFGG_${soup}_${ff}_${wat}_l${lambda}_npt.tpr" 
-        xtc="../data/GGFGG_${soup}_${ff}_${wat}_l${lambda}_npt_proc.xtc"
-        out="../analysis/GGFGG_${soup}_${ff}_${wat}_l${lambda}_npt_dip_sqr"
-        eps="../analysis/GGFGG_${soup}_${ff}_${wat}_l${lambda}_npt_dip_eps"
-        gmx dipoles -s $tpr -f $xtc -o $out -temp 298 -eps $eps -b 50000 -e 500000 <<EOF
-0
-EOF
-    # Errors by blocking
-        ie=100000
-        for b in $(seq 0 1 3)
-        do
-            ib=$ie
-            ie=$((ib + 100000))
-            out="../analysis/GGFGG_${soup}_${ff}_${wat}_l${lambda}_npt_dip_sqr_b${b}"
-            eps="../analysis/GGFGG_${soup}_${ff}_${wat}_l${lambda}_npt_dip_eps_b${b}"
-            gmx dipoles -s $tpr -f $xtc -o $out -temp 298 -eps $eps -b $ib -e $ie <<EOF 
-0
-EOF
-        done
-
-    done
-    wait
-
-done
 
 rm \#* ../analysis/\#*
 
