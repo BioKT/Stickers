@@ -708,7 +708,6 @@ Protein_chain_A  3
 #include "GGKGG_amber99sb-star-ildn_mut_posre.itp"
 #endif
 
-
 #include "./amber99sb-star-ildn-mut.ff/tip3p.itp"
 #ifdef POSRES_WATER
 [ position_restraints ]
@@ -716,11 +715,11 @@ Protein_chain_A  3
 #endif
 #include "./amber99sb-star-ildn-mut.ff/ions.itp"
 
-#include "cyclohexane.itp"
+#include "octanol.itp"
 
 [ system ]
 PMX MODEL
 
 [ molecules ]
 Protein_chain_A 1
-octanol 500
+octanol 400
