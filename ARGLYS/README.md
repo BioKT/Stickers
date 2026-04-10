@@ -4,7 +4,7 @@ This repository contains the input files, setup scripts, and analysis notebooks 
 
 ## Reference
 
-De Sancho, D. *Arginine, not lysine, is the stronger sticker residue in biomolecular condensates*. bioRxiv (2024). https://doi.org/10.1101/2024.10.18.619001
+Armentia, L., López, X. and De Sancho, D. *Arginine versus Lysine: Molecular Determinants of Cation–π Interactions in Biomolecular Condensates*. bioRxiv 2025.10.01.679751. https://doi.org/10.1101/2025.10.01.679751
 
 ## Overview
 
