@@ -1,6 +1,6 @@
 # Stickers: Arginine vs Lysine sticker strength in LLPS
 
-This repository contains the input files, setup scripts, and analysis notebooks associated with our study of the relative strength of arginine (Arg) and lysine (Lys) as "sticker" residues in the context of liquid–liquid phase separation (LLPS).
+This repository contains the input files and analysis notebooks associated with our study of the relative strength of arginine (Arg) and lysine (Lys) as "sticker" residues in the context of liquid–liquid phase separation (LLPS).
 
 ## Reference
 
@@ -8,99 +8,53 @@ Armentia, L., López, X. and De Sancho, D. *Arginine versus Lysine: Molecular De
 
 ## Overview
 
-We use alchemical free energy simulations (Lys → Arg mutations via PMX) to quantify the differential interaction strength of each residue with aromatic partners (Phe, Tyr). Simulations are run in multiple media — water, organic solvents of varying polarity, and multi-peptide slab boxes — to decompose the transfer and interaction components of sticker strength.
-
-**Peptide systems:**
-- `GG{K/R}GG` — single cationic residue flanked by Gly, used for solvent-transfer and alchemical free energy calculations
-- `G{K/R}GG{F/Y}` — cationic residue paired with an aromatic partner, used in slab and REMD simulations
+We use alchemical free energy simulations (Lys → Arg mutations via PMX) to quantify the differential cation–π interaction strength of each residue with aromatic partners (Phe, Tyr). Simulations are run in multiple media — water and organic solvents of varying polarity — as well as in multi-peptide slab boxes to directly probe condensate-like environments.
 
 ## Repository Contents
 
-### Force field
-
-`amber99sb-star-ildn-mut.ff/` — PMX-patched version of the `amber99sb-star-ildn` force field required for the hybrid Lys/Arg alchemical topology.
-
-### Structure files
-
-PDB structures for all simulated peptides (`GGKGG.pdb`, `GGRGG.pdb`, `GKGGF.pdb`, `GKGGY.pdb`, `GRGGF.pdb`, `GRGGY.pdb`) and individual amino acid reference structures (`lys.pdb`, `arg.pdb`).
-
 ### Topology files
 
-Pre-built GROMACS topology files (`.top`, `.itp`) for all systems covering:
-- Aqueous solvent (TIP3P water, physiological and net-neutral ion conditions)
-- Organic solvents (octanol, benzene, cyclohexane, acetone, ethanol, methanol, hexanol, toluene)
-- Biphasic coexistence boxes (`*COEX*`)
-- Multi-peptide slab boxes (`*soup*`, `*soupF*`)
+Alchemical hybrid topologies for the `GGKGG` pentapeptide (Lys → Arg mutation):
 
-Solvent molecules are provided as standalone `.itp` files (`octanol.itp`, `benzene.itp`, `cyclohexane.itp`, `acetone.itp`).
+- `GGKGG_amber99sb-star-ildn_mut.top` / `_posre.itp` — hybrid topology in vacuum
+- `GGKGG_amber99sb-star-ildn_tip3p_mut.top` — in TIP3P water
+- `GGKGG_amber99sb-star-ildn_tip3p_mut_neutral.top` / `_phys.top` — net-neutral and physiological (0.15 M NaCl) ion conditions
+- `GGKGG_amber99sb-star-ildn_octanol.top` / `_acetone.top` / `_cyclohexane.top` — in organic solvents
 
-### Setup scripts
+Multi-peptide slab topologies:
 
-| Script | Purpose |
-|---|---|
-| `setup_amber_pdb2gmx.sh` | Generate GROMACS topologies from PDB using `amber99sb-star-ildn` |
-| `mutate.sh` | Apply Lys → Arg PMX mutation and regenerate hybrid topology |
-| `setup_amber_equil.sh` | Equilibrate mutated peptide in water (EM → NVT → NPT) |
-| `setup_amber_solvents.sh` | Solvate and equilibrate in organic solvents; build biphasic boxes |
-| `setup_amber_soups.sh` | Set up multi-peptide slab boxes from PACKMOL structures |
-| `setup_amber_replex.sh` | Prepare H-REMD runs across a temperature ladder |
-| `setup_amber_tetra_equil.sh` | Equilibrate tetrapeptide systems with collective variables |
-| `setup_amber_switch.sh` | Extract frames and run alchemical switching simulations |
+- `GGKGG_soup_XXXL_amber99sb-star-ildn*.top` — slab of GGKGG peptides (without aromatic partner)
+- `GGKGG_soupF_XXXL_amber99sb-star-ildn*.top` — slab of GGKGG peptides with Phe aromatic partner; available for vacuum, TIP3P water, neutral and physiological conditions
 
-### Analysis scripts
+Individual amino acid reference topologies (`amber99sb-star-ildn`): Gly, Phe, Tyr, Ser (`.itp`, `.top`, `_posre.itp`).
 
-| Script | Purpose |
-|---|---|
-| `process.sh` | Post-process trajectories (`gmx trjconv`, PBC correction, decimation) |
-| `calc_density.sh` / `calc_density_replex.sh` | Compute density profiles along the slab axis |
-| `calc_sasa.sh` / `calc_sasa_replex.sh` | Compute solvent-accessible surface areas |
-| `calc_gr.sh` | Compute radial distribution functions |
-| `analysis_switch.sh` | Parse dhdl files from switching runs |
+Solvent molecule parameters: `octanol.itp`, `acetone.itp`, `cyclohexane.itp`.
+
+### Setup script
+
+`setup_amber_pdb2gmx.sh` — generates GROMACS topologies from PDB structures using `gmx pdb2gmx` with the `amber99sb-star-ildn` force field.
+
+### QM structures
+
+`structures/` — PDB and XYZ files of optimised geometries for Arg–Phe, Arg–Tyr, Lys–Phe, and Lys–Tyr interaction pairs (T-shaped and parallel stacking configurations).
 
 ### Jupyter notebooks
 
 | Notebook | Contents |
 |---|---|
-| `analysis_switch.ipynb` | Parse dhdl files; compute ΔG via BAR, Crooks, and Jarzynski estimators |
-| `analysis_dense.ipynb` | Density profiles for slab simulations; identify phase boundaries |
-| `analysis_replex.ipynb` | REMD trajectory analysis and SASA |
-| `analysis_interactions.ipynb` | Quantify Arg/Lys–Phe/Tyr contacts and geometry from MD |
+| `analysis_interactions.ipynb` | Quantify Arg/Lys–Phe/Tyr cation–π contacts and geometry from MD |
 | `analysis_interactions_qm.ipynb` | Combine QM interaction energies with MD structural data |
 | `analysis_rdf.ipynb` | Radial distribution functions between residue pairs |
 | `qmanalysis.ipynb` | Parse and analyse Gaussian output files |
-| `qm_fig_chargedneutral.ipynb` | Compare charged vs neutral QM calculations |
-| `xyzconverter.ipynb` | Convert QM-optimised structures (xyz) to PDB format |
+| `xyzconverter.ipynb` | Convert QM-optimised structures (XYZ) to PDB format |
 
-### QM input files
+### Data
 
-Gaussian input (`.gjf`) and output (`.log`) files for guanidinium geometry optimisations in vacuum and implicit solvent (PCM/SMD water) at multiple levels of theory (B3LYP, HF, wB97X-D / 6-311++G(d,p)).
-
-### PACKMOL
-
-`packmol/` — PACKMOL input files (`.inp`) and packed PDB structures for building the multi-peptide slab boxes.
-
-### Colvars
-
-`colvars.inp` / `colvars_template.inp` — NAMD Colvars input for metadynamics on the Cα contact number collective variable, used with the tetrapeptide slab systems.
-
-### Results data
-
-| File | Contents |
-|---|---|
-| `SOLVENTS.csv` | Dielectric constants and ΔG/ΔΔG values for each organic solvent (physiological) |
-| `NEUTRAL_SOLVENTS.csv` | Same quantities for net-neutral ion conditions |
-| `StickersKR_PHYS.csv` | ΔG and ΔΔG values for GSY and GSF slab systems (physiological) |
-| `StickersKR_NEUTRAL.csv` | Same for net-neutral conditions |
-| `DGt.dat` / `DGs.dat` / `DDGt.dat` | Transfer and solvation free energy tables |
-
-### Figures
-
-`figures/` — Publication-quality figures (PNG, SVG, EPS) covering the thermodynamic cycle, transfer free energies, density profiles, interaction geometries, and QM results.
+`contacts_qm_df.csv` — compiled QM interaction energies and MD contact geometries for all residue pairs.
 
 ## Dependencies
 
-- [GROMACS](https://www.gromacs.org/) (tested with 2018+)
-- [PMX](https://github.com/deGrootLab/pmx) — for Lys → Arg alchemical mutation
-- [PACKMOL](http://leandro.iqm.unicamp.br/m3g/packmol/home.shtml) — for building multi-peptide boxes
-- [Gaussian](https://gaussian.com/) — for QM calculations
-- Python (NumPy, MDTraj, matplotlib) — for analysis notebooks
+- [GROMACS](https://www.gromacs.org/) — MD simulations
+- [PMX](https://github.com/deGrootLab/pmx) — Lys → Arg alchemical mutation
+- [Gaussian](https://gaussian.com/) — QM calculations
+- Python (NumPy, MDTraj, matplotlib, pandas) — analysis notebooks
